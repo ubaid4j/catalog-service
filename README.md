@@ -1,2 +1,2 @@
 ### catalog-service
-- export some REST endpoints related to books management
+- provide an API to perform CRUD operations on books
