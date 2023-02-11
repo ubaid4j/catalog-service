@@ -2,6 +2,7 @@ package dev.ubaid.catalogservice.web;
 
 import dev.ubaid.catalogservice.domain.Book;
 import dev.ubaid.catalogservice.domain.BookService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class BookController {
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book create(@RequestBody Book book) {
+    public Book create(@Valid @RequestBody Book book) {
         return bookService.addBookToCatalog(book);
     }
     
@@ -45,7 +46,7 @@ public class BookController {
     }
     
     @PutMapping("{isbn}")
-    public Book updateOrCreate(@PathVariable String isbn, @RequestBody Book book) {
+    public Book updateOrCreate(@Valid @PathVariable String isbn, @RequestBody Book book) {
         return bookService.editBookDetails(isbn, book);
     }
 }
