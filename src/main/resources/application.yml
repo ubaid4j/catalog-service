@@ -1,3 +1,10 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - refresh
+
 #------------------------Server    --------------------------#
 server:
   port: 50100
@@ -8,8 +15,23 @@ server:
       max: 50
       min-spare: 5
 
-#------------------------Hot Reload--------------------------#
 spring:
+  application:
+    name: catalog-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      uri: http://localhost:8888
+      request-connect-timeout: 5000 #ms
+      request-read-timeout: 5000 #ms
+      fail-fast: false
+      retry:
+        max-attempts: 3
+        initial-interval: 1000
+        max-interval: 2000
+        multiplier: 1.1
+  #------------------------Hot Reload--------------------------#
   devtools:
     livereload:
       port: 35731
@@ -24,13 +46,15 @@ spring:
 #-----------------------Logging------------------------------#
 logging:
   level:
+    ROOT: DEBUG
+    web: DEBUG
     dev:
       ubaid: TRACE
     org:
       springframework:
-        web: DEBUG
+        retry: DEBUG
   pattern:
-    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr([%file:%line]){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){yellow} %clr([%file:%line]){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
     
     
 #-----------------------Application--------------------------#
