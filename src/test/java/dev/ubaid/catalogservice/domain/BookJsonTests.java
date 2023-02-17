@@ -15,7 +15,7 @@ public class BookJsonTests {
     
     @Test
     void testSerialize() throws Exception {
-        var book = new Book("1234567890", "Title", "Author", 10.1);
+        var book = Book.of("1234567890", "Title", "Author", 10.1);
         var jsonContent = json.write(book);
         
         assertThat(jsonContent).extractingJsonPathStringValue("@.isbn").isEqualTo(book.isbn());
@@ -37,6 +37,6 @@ public class BookJsonTests {
         
         assertThat(json.parse(content))
             .usingRecursiveComparison()
-            .isEqualTo(new Book("1234567890", "Title", "Author", 10.1));
+            .isEqualTo(Book.of("1234567890", "Title", "Author", 10.1));
     }
 }

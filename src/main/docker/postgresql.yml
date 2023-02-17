@@ -6,6 +6,7 @@ services:
     volumes:
        - /private/storage/postgres-data/catalogservice/:/var/lib/postgresql/data/
     environment:
+      - POSTGRES_DB=polardb_catalog
       - POSTGRES_USER=catalogservice
       - POSTGRES_PASSWORD=
       - POSTGRES_HOST_AUTH_METHOD=trust

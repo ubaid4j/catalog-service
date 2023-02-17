@@ -7,7 +7,7 @@ management:
 
 #------------------------Server    --------------------------#
 server:
-  port: 50100
+  port: 50101
   tomcat:
     connection-timeout: 2s
     keep-alive-timeout: 15s
@@ -31,6 +31,16 @@ spring:
         initial-interval: 1000
         max-interval: 2000
         multiplier: 1.1
+  datasource:
+    username: catalogservice
+    password: 
+    url: jdbc:postgresql://localhost:5590/polardb_catalog
+    hikari:
+      connection-timeout: 2000
+      maximum-pool-size: 5
+  sql:
+    init:
+      mode: ALWAYS
   #------------------------Hot Reload--------------------------#
   devtools:
     livereload:
@@ -46,7 +56,7 @@ spring:
 #-----------------------Logging------------------------------#
 logging:
   level:
-    ROOT: DEBUG
+    ROOT: INFO
     web: DEBUG
     dev:
       ubaid: TRACE
