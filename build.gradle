@@ -56,3 +56,13 @@ bootRun {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+bootBuildImage {
+    docker {
+        publishRegistry {
+            username=project.findProperty("registryUsername")
+            password=project.findProperty("registryToken")
+            url=project.findProperty("registryUrl")
+        }
+    }
+}

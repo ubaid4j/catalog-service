@@ -1,4 +1,15 @@
-FROM ubuntu:latest
-ARG NATIE_FILE=build/native/nativeCompile/catalog-service
-COPY ${NATIE_FILE} catalog-service
-ENTRYPOINT [ "/bin/sh", "-l", "-c", "--static", "./catalog-service"]
+FROM eclipse-temurin:17 AS builder
+WORKDIR workspace
+ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} catalog-service.jar
+RUN java -Djarmode=layertools -jar catalog-service.jar extract
+
+FROM eclipse-temurin:17
+RUN useradd spring
+USER spring
+WORKDIR workspace
+COPY --from=builder workspace/dependencies/ ./
+COPY --from=builder workspace/spring-boot-loader/ ./
+COPY --from=builder workspace/snapshot-dependencies ./
+COPY --from=builder workspace/application/ ./
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
