@@ -8,6 +8,7 @@ management:
 #------------------------Server    --------------------------#
 server:
   port: 50101
+  shutdown: graceful
   tomcat:
     connection-timeout: 2s
     keep-alive-timeout: 15s
@@ -38,6 +39,8 @@ spring:
     hikari:
       connection-timeout: 2000
       maximum-pool-size: 5
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
   #------------------------Hot Reload--------------------------#
   devtools:
     livereload:
