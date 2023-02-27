@@ -2,7 +2,10 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.2'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'org.graalvm.buildtools.native' version '0.9.18'
+}
+
+if (project.hasProperty('native')) {
+    apply plugin: 'org.graalvm.buildtools.native:0.9.18'
 }
 
 group = 'dev.ubaid'
@@ -31,6 +34,7 @@ dependencies {
     implementation 'org.springframework.retry:spring-retry'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.flywaydb:flyway-core'
     runtimeOnly 'org.postgresql:postgresql'
     compileOnly 'org.projectlombok:lombok'
@@ -63,6 +67,27 @@ bootBuildImage {
             username=project.findProperty("registryUsername")
             password=project.findProperty("registryToken")
             url=project.findProperty("registryUrl")
+        }
+    }
+}
+
+
+bootBuildImage {
+    environment = [
+            'SPRING_PROFILES_ACTIVE': 'prod'
+    ]
+    docker {
+        doFirst {
+            if (project.hasProperty("ci")) {
+                // configure the publishRegistry task here
+                publishRegistry {
+                    username=project.findProperty("registryUsername")
+                    password=project.findProperty("registryToken")
+                    url=project.findProperty("registryUrl")
+                }
+                // execute the publishRegistry task
+                publishRegistry.execute()
+            }
         }
     }
 }

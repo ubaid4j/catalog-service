@@ -5,7 +5,7 @@ metadata:
   labels:
     app: catalog-service
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       app: catalog-service
@@ -29,6 +29,8 @@ spec:
               value: password
             - name: SPRING_PROFILES_ACTIVE
               value: testdata,prod
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: 'http://config-service'
           lifecycle:
             preStop:
               exec:
