@@ -62,17 +62,6 @@ tasks.named('test') {
 }
 
 bootBuildImage {
-    docker {
-        publishRegistry {
-            username=project.findProperty("registryUsername")
-            password=project.findProperty("registryToken")
-            url=project.findProperty("registryUrl")
-        }
-    }
-}
-
-
-bootBuildImage {
     environment = [
             'SPRING_PROFILES_ACTIVE': 'prod'
     ]
