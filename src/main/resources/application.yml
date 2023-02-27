@@ -21,6 +21,9 @@ spring:
     name: catalog-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
+  cloud:
+    config:
+      enabled: false
   #------------------------Hot Reload--------------------------#
   devtools:
     livereload:

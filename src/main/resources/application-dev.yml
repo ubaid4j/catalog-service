@@ -3,6 +3,7 @@ spring:
     import: "optional:configserver:"
   cloud:
     config:
+      enabled: true
       uri: http://localhost:50100
       request-connect-timeout: 5000 #ms
       request-read-timeout: 5000 #ms
