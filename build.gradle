@@ -75,12 +75,6 @@ bootBuildImage {
     docker {
         doFirst {
             if (project.hasProperty("ci")) {
-                // configure the publishRegistry task here
-                publishRegistry {
-                    username=project.findProperty("registryUsername")
-                    password=project.findProperty("registryToken")
-                    url=project.findProperty("registryUrl")
-                }
                 // execute the publishRegistry task
                 publishRegistry.execute()
             }
