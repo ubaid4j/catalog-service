@@ -68,15 +68,24 @@ tasks.named('test') {
 }
 
 bootBuildImage {
-    environment = [
-            'SPRING_PROFILES_ACTIVE': 'prod',
-            'BP_NATIVE_IMAGE': 'true',
-    ]
+    if (project.hasProperty("native")) {
+        environment = [
+                'SPRING_PROFILES_ACTIVE': 'prod',
+                'BP_NATIVE_IMAGE': 'true',
+
+        ]
+    } else {
+        environment = [
+                'SPRING_PROFILES_ACTIVE': 'prod',
+        ]
+    }
     docker {
-        doFirst {
-            if (project.hasProperty("ci")) {
-                // execute the publishRegistry task
-                publishRegistry.execute()
+        if (project.hasProperty("ci")) {
+            // configure the publishRegistry task here
+            publishRegistry {
+                username=project.findProperty("registryUsername")
+                password=project.findProperty("registryToken")
+                url=project.findProperty("registryUrl")
             }
         }
     }
