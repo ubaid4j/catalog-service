@@ -30,7 +30,7 @@ spring:
       port: 35731
     restart:
       quiet-period: 
-      poll-interval: 3000      
+      poll-interval: 2s 
 #------------------------Profiles Management--------------------------#
   profiles:
     active:

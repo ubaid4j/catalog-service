@@ -1,8 +1,12 @@
 package dev.ubaid.catalogservice.domain;
 
+import java.util.concurrent.ThreadLocalRandom;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class BookService {
     
     private final BookRepository bookRepository;
@@ -11,7 +15,9 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
     
+    @SneakyThrows
     public Iterable<Book> viewBookList() {
+        Thread.sleep(ThreadLocalRandom.current().nextInt(6000));
         return bookRepository.findAll();
     }
     
