@@ -10,6 +10,9 @@ import java.time.temporal.ChronoUnit;
 
 public class InstantSerializer extends JsonSerializer<Instant> {
 
+    public InstantSerializer() {
+    }
+
     @Override
     public void serialize(Instant value, JsonGenerator gen, SerializerProvider serializers)
         throws IOException {
