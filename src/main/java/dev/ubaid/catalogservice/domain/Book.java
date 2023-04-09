@@ -1,5 +1,8 @@
 package dev.ubaid.catalogservice.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import dev.ubaid.catalogservice.util.InstantSerializer;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -11,10 +14,10 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
 
 public record Book(
-    
+
     @Id
     Long id,
-    
+
     @NotBlank(message = "The book ISBN must be defined.")
     @Pattern(
         regexp = "^([0-9]{10}|[0-9]{13})$",
@@ -37,10 +40,12 @@ public record Book(
     Double price,
 
     String publisher,
-    
+
+    @JsonSerialize(using = InstantSerializer.class)
     @CreatedDate
     Instant createdDate,
 
+    @JsonSerialize(using = InstantSerializer.class)
     @LastModifiedDate
     Instant lastModifiedDate,
 
