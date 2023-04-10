@@ -1,8 +1,5 @@
 package dev.ubaid.catalogservice.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import dev.ubaid.catalogservice.util.InstantSerializer;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -41,11 +38,9 @@ public record Book(
 
     String publisher,
 
-    @JsonSerialize(using = InstantSerializer.class)
     @CreatedDate
     Instant createdDate,
 
-    @JsonSerialize(using = InstantSerializer.class)
     @LastModifiedDate
     Instant lastModifiedDate,
 
