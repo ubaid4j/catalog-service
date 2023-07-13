@@ -20,3 +20,9 @@ spring:
     hikari:
       connection-timeout: 2000
       maximum-pool-size: 5
+
+
+logging:
+  level:
+    root: DEBUG
+    org.springframework.security: TRACE
