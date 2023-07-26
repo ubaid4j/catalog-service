@@ -55,7 +55,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation 'com.github.dasniko:testcontainers-keycloak:3.0.0'
+    testImplementation "com.github.dasniko:testcontainers-keycloak:${testKeycloakVersion}"
 }
 
 dependencyManagement {
