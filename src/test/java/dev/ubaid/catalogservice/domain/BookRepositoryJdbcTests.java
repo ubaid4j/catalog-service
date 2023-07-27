@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 
 @DataJdbcTest
@@ -36,5 +37,22 @@ public class BookRepositoryJdbcTests {
         
         assertThat(actualBook).isPresent();
         assertThat(actualBook.get().isbn()).isEqualTo(book.isbn());
+    }
+    
+    @Test
+    void whenCreateBookNotAuthenticatedThenNoAuditMetaData() {
+        Book bookToCreate = Book.of("1234567890", "Title", "ubaid", 25.1);
+        Book createdBook = bookRepository.save(bookToCreate);
+        assertThat(createdBook.createdBy()).isNull();
+        assertThat(createdBook.lastModifiedBy()).isNull();;
+    }
+    
+    @Test
+    @WithMockUser("ubaid")
+    void whenCreateBookAuthenticatedThenAuditMetaData() {
+        Book bookToCreate = Book.of("1234567890", "Title", "Author", 342.0);
+        Book createdBook = bookRepository.save(bookToCreate);
+        assertThat(createdBook.createdBy()).isEqualTo("ubaid");
+        assertThat(createdBook.lastModifiedBy()).isEqualTo("ubaid");
     }
 }
