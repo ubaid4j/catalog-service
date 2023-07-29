@@ -41,7 +41,7 @@ public class BookRepositoryJdbcTests {
     
     @Test
     void whenCreateBookNotAuthenticatedThenNoAuditMetaData() {
-        Book bookToCreate = Book.of("1234567890", "Title", "ubaid", 25.1);
+        Book bookToCreate = Book.of("1234567893", "Title", "ubaid", 25.1);
         Book createdBook = bookRepository.save(bookToCreate);
         assertThat(createdBook.createdBy()).isNull();
         assertThat(createdBook.lastModifiedBy()).isNull();;
@@ -50,7 +50,7 @@ public class BookRepositoryJdbcTests {
     @Test
     @WithMockUser("ubaid")
     void whenCreateBookAuthenticatedThenAuditMetaData() {
-        Book bookToCreate = Book.of("1234567890", "Title", "Author", 342.0);
+        Book bookToCreate = Book.of("1234567894", "Title", "Author", 342.0);
         Book createdBook = bookRepository.save(bookToCreate);
         assertThat(createdBook.createdBy()).isEqualTo("ubaid");
         assertThat(createdBook.lastModifiedBy()).isEqualTo("ubaid");

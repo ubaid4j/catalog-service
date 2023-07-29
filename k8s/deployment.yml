@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: catalog-service
-          image: ghcr.io/ubaid4j/catalog-service:0.0.2-snapshot
+          image: ghcr.io/ubaid4j/catalog-service:0.0.3-snapshot
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 50101
@@ -28,12 +28,14 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: catalog
             - name: SPRING_PROFILES_ACTIVE
-              value: testdata,prod
+              value: prod
             - name: SPRING_CLOUD_CONFIG_URI
               value: http://config-service
               # TODO Create a minimal reproducible sample and create issue in spring boot repo
             - name: SPRING_CLOUD_CONFIG_FAIL_FAST
               value: "false"
+            - name: AUTH_SERVER_URL
+              value: "http://polar-keycloak"
           lifecycle:
             preStop:
               exec:

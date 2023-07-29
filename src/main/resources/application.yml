@@ -30,7 +30,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:50907/realms/PolarBookshop
+          issuer-uri: ${AUTH_SERVER_URL:http://localhost:50907}/realms/PolarBookshop
   #------------------------Hot Reload--------------------------#
   devtools:
     livereload:
