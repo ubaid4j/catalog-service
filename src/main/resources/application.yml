@@ -34,7 +34,7 @@ spring:
   #------------------------Hot Reload--------------------------#
   devtools:
     livereload:
-      port: 35731
+      port: 51101
     restart:
       quiet-period:
       poll-interval: 2s
@@ -46,13 +46,8 @@ spring:
 #-----------------------Logging------------------------------#
 logging:
   level:
-    ROOT: INFO
-    web: DEBUG
     dev:
       ubaid: TRACE
-    org:
-      springframework:
-        retry: DEBUG
   pattern:
     console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){yellow} %clr([%file:%line]){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
 
