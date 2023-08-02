@@ -4,6 +4,13 @@ management:
       exposure:
         include:
           - refresh
+          - health
+  endpoint:
+    health:
+      show-components: always
+      show-details: always
+      probes:
+        enabled: true
 
 #------------------------Server    --------------------------#
 server:
@@ -36,8 +43,9 @@ spring:
     livereload:
       port: 51101
     restart:
-      quiet-period:
       poll-interval: 2s
+      quiet-period: 1s
+      enabled: true
 #------------------------Profiles Management--------------------------#
   profiles:
     active:
@@ -48,10 +56,6 @@ logging:
   level:
     dev:
       ubaid: TRACE
-  pattern:
-    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd'T'HH:mm:ss.SSSXXX}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){yellow} %clr([%file:%line]){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
-
-
 #-----------------------Application--------------------------#
 polar:
   greeting: Welcome Home from default prop file
