@@ -20,6 +20,18 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 50101
+          livenessProbe:
+            httpGet:
+              path: /management/health/liveness
+              port: 50101
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /management/health/readiness
+              port: 50101
+            initialDelaySeconds: 5
+            periodSeconds: 15
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://catalog-postgres/polardb_catalog
