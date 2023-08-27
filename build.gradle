@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath 'org.graalvm.buildtools:native-gradle-plugin:0.9.20'
+        classpath 'org.graalvm.buildtools:native-gradle-plugin:0.9.25'
     }
 }
 
@@ -16,7 +16,7 @@ if (project.hasProperty('native')) {
 }
 
 group = 'dev.ubaid'
-version = '0.0.3-SNAPSHOT'
+version = '0.0.4-SNAPSHOT'
 sourceCompatibility = '17'
 
 configurations {
@@ -75,6 +75,7 @@ tasks.named('test') {
 }
 
 bootBuildImage {
+    builder="paketobuildpacks/builder-jammy-full"
     if (project.hasProperty("native")) {
         environment = [
                 'SPRING_PROFILES_ACTIVE': 'prod',
