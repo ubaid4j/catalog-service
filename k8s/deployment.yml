@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: catalog-service
-          image: ghcr.io/ubaid4j/catalog-service:0.0.4-snapshot
+          image: ghcr.io/ubaid4j/catalog-service:0.0.6-snapshot
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 50101
