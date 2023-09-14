@@ -1,0 +1,15 @@
+polar:
+  greeting: Welcome Home from k8s!
+spring:
+  datasource:
+    username: catalog
+    password: catalog
+    url: jdbc:postgresql://catalog-postgres/polardb_catalog
+  hikari:
+    connection-timeout: 2000
+    maximum-pool-size: 5
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://polar-keycloak/realms/PolarBookshop
