@@ -1,6 +1,9 @@
 polar:
   greeting: Welcome Home from k8s!
 spring:
+  cloud:
+    config:
+      enabled: false
   datasource:
     username: catalog
     password: catalog
