@@ -45,7 +45,7 @@ jobs:
           kubeval: latest
       - name: Validate Kubernetes manifests
         run: |
-          kustomize build k8s | kubeval --strict -d k8s
+          kustomize build k8s/k8s.yml | kubeval --strict -d k8s/k8s.yml
 
   package:
     name: Package and Publish
