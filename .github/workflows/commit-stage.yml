@@ -38,13 +38,12 @@ jobs:
           chmod +x gradlew
           ./gradlew build
       - name: Setup k8s validator
-        uses: alexellis/setup-arkade@v1
-      - name: Validate Kubernetes manifests
         uses: alexellis/arkade-get@master
         with:
           kubectl: latest
           kustomize: latest
           kubeval: latest
+      - name: Validate Kubernetes manifests
         run: |
           kustomize build k8s | kubeval --strict -d k8s
 
