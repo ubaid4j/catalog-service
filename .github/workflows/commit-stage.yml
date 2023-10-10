@@ -45,8 +45,8 @@ jobs:
           kubectl: latest
           kustomize: latest
           kubeval: latest
-          command: |
-            kustomize build k8s | kubeval --strict -d k8s
+        run: |
+          kustomize build k8s | kubeval --strict -d k8s
 
   package:
     name: Package and Publish
